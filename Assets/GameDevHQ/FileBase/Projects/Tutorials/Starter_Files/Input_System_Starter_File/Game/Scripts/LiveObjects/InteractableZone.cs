@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
 
-
-namespace Game.Scripts.LiveObjects
-{
+// namespace Game.Scripts.LiveObjects
+// {
     public class InteractableZone : MonoBehaviour
     {
         private enum ZoneType
@@ -51,16 +50,10 @@ namespace Game.Scripts.LiveObjects
         public static int CurrentZoneID
         { 
             get 
-            { 
-               return _currentZoneID; 
-            }
+            { return _currentZoneID; }
             set
-            {
-                _currentZoneID = value; 
-                         
-            }
+            { _currentZoneID = value; }
         }
-
 
         public static event Action<InteractableZone> onZoneInteractionComplete;
         public static event Action<int> onHoldStarted;
@@ -124,7 +117,6 @@ namespace Game.Scripts.LiveObjects
         {
             if (_inZone == true)
             {
-
                 if (Input.GetKeyDown(_zoneKeyInput) && _keyState != KeyState.PressHold)
                 {
                     //press
@@ -152,9 +144,7 @@ namespace Game.Scripts.LiveObjects
                 else if (Input.GetKey(_zoneKeyInput) && _keyState == KeyState.PressHold && _inHoldState == false)
                 {
                     _inHoldState = true;
-
-                   
-
+                    
                     switch (_zoneType)
                     {                      
                         case ZoneType.HoldAction:
@@ -168,8 +158,6 @@ namespace Game.Scripts.LiveObjects
                     _inHoldState = false;
                     onHoldEnded?.Invoke(_zoneID);
                 }
-
-               
             }
         }
        
@@ -185,7 +173,6 @@ namespace Game.Scripts.LiveObjects
             CompleteTask(_zoneID);
 
             onZoneInteractionComplete?.Invoke(this);
-
         }
 
         private void PerformAction()
@@ -255,6 +242,6 @@ namespace Game.Scripts.LiveObjects
         }       
         
     }
-}
+// }
 
 
