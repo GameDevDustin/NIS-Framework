@@ -29,7 +29,7 @@ namespace Game.Scripts.LiveObjects
         private bool _actionPerformed = false;
         [SerializeField] private Sprite _inventoryIcon;
         [SerializeField] private GameObject _marker;
-        private static int _currentZoneID = 0;
+        static int _currentZoneID = 0;
         public static int CurrentZoneID
         { 
             get 
@@ -45,11 +45,6 @@ namespace Game.Scripts.LiveObjects
             ZoneInteractions.onZoneInteractionComplete += SetMarker;
         }
         
-        private void OnDisable()
-        {
-            ZoneInteractions.onZoneInteractionComplete -= SetMarker;
-        }    
-
         private void Awake()
         {
             _inputActions = new InputActions();
@@ -173,9 +168,12 @@ namespace Game.Scripts.LiveObjects
 
         private void PerformAction()
         {
-            foreach (var item in _zoneItems)
+            if (_zoneItems.Length > 0)
             {
-                item.SetActive(true);
+                foreach (var item in _zoneItems)
+                {
+                    item.SetActive(true);
+                }
             }
 
             if (_inventoryIcon != null)
@@ -196,6 +194,7 @@ namespace Game.Scripts.LiveObjects
             if (zoneID == _zoneID)
             {
                 _currentZoneID++;
+                //Debug.Log(_currentZoneID);
                 onZoneInteractionComplete?.Invoke(this);
             }
         }
@@ -223,6 +222,13 @@ namespace Game.Scripts.LiveObjects
             else
                 _marker.SetActive(false);
         }
+        
+        private void OnDisable()
+        {
+            ZoneInteractions.onZoneInteractionComplete -= SetMarker;
+            _inputActions.Character.Interact.performed -= InteractOnperformed;
+            _inputActions.Character.InteractHold.performed -= InteractHoldOnperformed;
+        }    
     }
 }
 

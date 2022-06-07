@@ -69,7 +69,7 @@ MonoBehaviour:
   _inventoryIcon: {fileID: 21300000, guid: 8e46bcb2f14d4d144b9e4a395b47efa2, type: 3}
   _zoneKeyInput: 101
   _keyState: 0
-  _marker: {fileID: 5234913522643084259}
+  _marker: {fileID: 0}
 --- !u!114 &482471388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ PrefabInstance:
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
@@ -140,17 +140,17 @@ PrefabInstance:
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.278
+      value: -0.327
       objectReference: {fileID: 0}
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.39
       objectReference: {fileID: 0}
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.099
+      value: 0.222
       objectReference: {fileID: 0}
     - target: {fileID: 8458200631146686513, guid: d65c798ada92d4e81a896301d3a7aa8f,
         type: 3}
