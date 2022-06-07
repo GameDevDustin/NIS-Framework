@@ -10,10 +10,11 @@ namespace Game.Scripts.LiveObjects
     {
         private void OnEnable()
         {
-            InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
+            //InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
+            ZoneInteractions.onZoneInteractionComplete += ZoneInteractions_OnZoneInteractionComplete;
         }
 
-        private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
+        private void ZoneInteractions_OnZoneInteractionComplete(ZoneInteractions zone)
         {
             if (zone.GetZoneID() == 7)
             {
@@ -22,9 +23,19 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
+        // private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
+        // {
+        //     if (zone.GetZoneID() == 7)
+        //     {
+        //         InteractableZone.CurrentZoneID = 0;
+        //         SceneManager.LoadScene(0);
+        //     }
+        // }
+
         private void OnDisable()
         {
-            InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
+            // InteractableZone.onZoneInteractionComplete -= InteractableZone_onZoneInteractionComplete;
+            ZoneInteractions.onZoneInteractionComplete -= ZoneInteractions_OnZoneInteractionComplete;
         }
     }
 }

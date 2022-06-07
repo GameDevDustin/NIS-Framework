@@ -25,10 +25,16 @@ namespace Game.Scripts.LiveObjects
         private CinemachineVirtualCamera _droneCam;
         [SerializeField]
         private InteractableZone _interactableZone;
-        
+
+        private InputActions _inputActions;
 
         public static event Action OnEnterFlightMode;
         public static event Action onExitFlightmode;
+
+        private void Awake()
+        {
+            _inputActions = new InputActions();
+        }
 
         private void OnEnable()
         {
@@ -45,6 +51,8 @@ namespace Game.Scripts.LiveObjects
                 OnEnterFlightMode?.Invoke();
                 UIManager.Instance.DroneView(true);
                 _interactableZone.CompleteTask(4);
+                // _inputActions.Character.Disable();
+                _inputActions.Drone.Enable();
             }
         }
 
@@ -52,7 +60,9 @@ namespace Game.Scripts.LiveObjects
         {            
             _droneCam.Priority = 9;
             _inFlightMode = false;
-            UIManager.Instance.DroneView(false);            
+            UIManager.Instance.DroneView(false);
+            _inputActions.Drone.Disable();
+            // _inputActions.Character.Enable();
         }
 
         private void Update()

@@ -101,27 +101,18 @@ namespace Game.Scripts.Player
 
         }
 
-        // private void InteractableZone_onZoneInteractionComplete(InteractableZone zone)
-        // {
-        //     switch(zone.GetZoneID())
-        //     {
-        //         case 1: //place c4
-        //             _detonator.Show();
-        //             break;
-        //         case 2: //Trigger Explosion
-        //             TriggerExplosive();
-        //             break;
-        //     }
-        // }
-
         private void ReleasePlayerControl()
         {
+            _inputActions.Character.Disable();
+            // _inputActions.Drone.Enable();
             _canMove = false;
             _followCam.Priority = 9;
         }
 
         private void ReturnPlayerControl()
         {
+            // _inputActions.Drone.Disable();
+            _inputActions.Character.Enable();
             _model.SetActive(true);
             _canMove = true;
             _followCam.Priority = 10;

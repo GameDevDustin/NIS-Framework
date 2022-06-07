@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
+using UnityEditor;
 using UnityEngine.InputSystem;
 
 namespace Game.Scripts.LiveObjects
@@ -20,9 +21,7 @@ namespace Game.Scripts.LiveObjects
         [SerializeField] private int _requiredID;
         [SerializeField] [Tooltip("Hold the (---) Key to .....")]
         private string _displayMessage;
-
         private string _interactionKeyBinding;
-        
         [SerializeField] private GameObject[] _zoneItems;
         private bool _inZone = false;
         private bool _itemsCollected = false;
@@ -37,6 +36,8 @@ namespace Game.Scripts.LiveObjects
             set
             { _currentZoneID = value; }
         }
+
+        [SerializeField] private Laptop _laptopScript;
 
         public static event Action<ZoneInteractions> onZoneInteractionComplete;
         
@@ -53,10 +54,38 @@ namespace Game.Scripts.LiveObjects
             _inputActions.Character.Enable();
             _inputActions.Character.Interact.performed += InteractOnperformed;
             _inputActions.Character.InteractHold.performed += InteractHoldOnperformed;
+            _inputActions.Character.InteractHold.started += InteractHoldOnstarted;
+            _inputActions.Character.InteractHold.canceled += InteractHoldOncanceled;
+            _inputActions.Character.Escape.performed += EscapeOnperformed;
+        }
+        
+        private void EscapeOnperformed(InputAction.CallbackContext context)
+        {
+            switch (_currentZoneID)
+                {
+                    case 4:
+                        _laptopScript.ExitHack();
+                        break;
+                }
+        }
+
+        private void InteractHoldOnstarted(InputAction.CallbackContext context)
+        {
+            //Debug.Log("InteractHoldOnStarted in ZoneInteractions fired.");
+            if (_inZone)
+            {
+                switch (_currentZoneID)
+                {
+                    case 3:
+                        _laptopScript.HoldInteractStart();
+                        break;
+                }
+            }
         }
 
         private void InteractHoldOnperformed(InputAction.CallbackContext context)
         {
+            //Debug.Log("InteractHoldOnPerformed in ZoneInteractions fired");
             if (_inZone)
             {
                 switch (_zoneType)
@@ -69,6 +98,19 @@ namespace Game.Scripts.LiveObjects
             }
         }
 
+        private void InteractHoldOncanceled(InputAction.CallbackContext context)
+        {
+            if (_inZone)
+            {
+                switch (_currentZoneID)
+                {
+                    case 3:
+                        _laptopScript.HoldInteractCancelled();
+                        break;
+                }  
+            }
+        }
+        
         private void InteractOnperformed(InputAction.CallbackContext context)
         {
             if (_inZone)
@@ -208,7 +250,12 @@ namespace Game.Scripts.LiveObjects
         {
             return _zoneID;
         }
-        
+
+        public int GetCurrentZoneID()
+        {
+            return _currentZoneID;
+        }
+
         public void ResetAction(int zoneID)
         {
             if (zoneID == _zoneID)
@@ -218,16 +265,28 @@ namespace Game.Scripts.LiveObjects
         public void SetMarker(ZoneInteractions zone)
         {
             if (_zoneID == _currentZoneID)
+            {
                 _marker.SetActive(true);
+            }
             else
-                _marker.SetActive(false);
+            {
+                _marker.SetActive(false); 
+            }
+
+            if (_zoneID < _currentZoneID)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
         
         private void OnDisable()
         {
             ZoneInteractions.onZoneInteractionComplete -= SetMarker;
             _inputActions.Character.Interact.performed -= InteractOnperformed;
+            _inputActions.Character.InteractHold.started -= InteractHoldOnstarted;
             _inputActions.Character.InteractHold.performed -= InteractHoldOnperformed;
+            _inputActions.Character.InteractHold.canceled -= InteractHoldOncanceled;
+            _inputActions.Character.Escape.performed -= EscapeOnperformed;
         }    
     }
 }
