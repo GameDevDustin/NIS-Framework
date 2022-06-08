@@ -385,6 +385,140 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Drive"",
+            ""id"": ""2de6b115-3922-4904-9bc0-fe13ed325153"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""0cd1aac8-cbfa-467a-9e17-be9668d2e5e6"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Secondary Movement"",
+                    ""type"": ""Button"",
+                    ""id"": ""455db20e-fe65-4769-8977-ff8fb4a88184"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""07f40d2e-702b-46b4-a4b4-5e27f679e073"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""5e68b548-f330-4f09-aac5-b39de59c622c"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""036a452b-e2c6-4947-8c92-21d17ad512cd"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8b732c5d-2793-4df0-9d59-5bdb4fee4305"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b877d6e1-7a20-4456-afa6-346ee1f0e768"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""479b693a-3387-4776-8bf9-ef6b0e82a7fd"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""6d147bd4-5b13-4024-b23c-5bbc00d3ad1d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""19246e34-62fa-48e7-8b3b-8efe81f65c30"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""71c020f4-ed8b-4d49-bdd9-f628d322e38f"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Secondary Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e7fdeb9-719e-4893-a4c9-74884056528a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -401,6 +535,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Drone_Vertical = m_Drone.FindAction("Vertical", throwIfNotFound: true);
         m_Drone_Rotate = m_Drone.FindAction("Rotate", throwIfNotFound: true);
         m_Drone_ExitFlightMode = m_Drone.FindAction("ExitFlightMode", throwIfNotFound: true);
+        // Drive
+        m_Drive = asset.FindActionMap("Drive", throwIfNotFound: true);
+        m_Drive_Move = m_Drive.FindAction("Move", throwIfNotFound: true);
+        m_Drive_SecondaryMovement = m_Drive.FindAction("Secondary Movement", throwIfNotFound: true);
+        m_Drive_Exit = m_Drive.FindAction("Exit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -570,6 +709,55 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public DroneActions @Drone => new DroneActions(this);
+
+    // Drive
+    private readonly InputActionMap m_Drive;
+    private IDriveActions m_DriveActionsCallbackInterface;
+    private readonly InputAction m_Drive_Move;
+    private readonly InputAction m_Drive_SecondaryMovement;
+    private readonly InputAction m_Drive_Exit;
+    public struct DriveActions
+    {
+        private @InputActions m_Wrapper;
+        public DriveActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Drive_Move;
+        public InputAction @SecondaryMovement => m_Wrapper.m_Drive_SecondaryMovement;
+        public InputAction @Exit => m_Wrapper.m_Drive_Exit;
+        public InputActionMap Get() { return m_Wrapper.m_Drive; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DriveActions set) { return set.Get(); }
+        public void SetCallbacks(IDriveActions instance)
+        {
+            if (m_Wrapper.m_DriveActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_DriveActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_DriveActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_DriveActionsCallbackInterface.OnMove;
+                @SecondaryMovement.started -= m_Wrapper.m_DriveActionsCallbackInterface.OnSecondaryMovement;
+                @SecondaryMovement.performed -= m_Wrapper.m_DriveActionsCallbackInterface.OnSecondaryMovement;
+                @SecondaryMovement.canceled -= m_Wrapper.m_DriveActionsCallbackInterface.OnSecondaryMovement;
+                @Exit.started -= m_Wrapper.m_DriveActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_DriveActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_DriveActionsCallbackInterface.OnExit;
+            }
+            m_Wrapper.m_DriveActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @SecondaryMovement.started += instance.OnSecondaryMovement;
+                @SecondaryMovement.performed += instance.OnSecondaryMovement;
+                @SecondaryMovement.canceled += instance.OnSecondaryMovement;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+        }
+    }
+    public DriveActions @Drive => new DriveActions(this);
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -583,5 +771,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnVertical(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnExitFlightMode(InputAction.CallbackContext context);
+    }
+    public interface IDriveActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnSecondaryMovement(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }
