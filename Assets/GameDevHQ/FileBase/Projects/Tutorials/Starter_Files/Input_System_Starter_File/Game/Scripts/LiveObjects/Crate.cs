@@ -37,7 +37,9 @@ namespace Game.Scripts.LiveObjects
         {
             //Debug.Log("PunchOnPerformed context: " + context);
             //Debug.Log("Tap or Hold: " + context.interaction);
+            
             _punchInteractionType = context.interaction.ToString();
+            
             // if (_punchInteractionType == "UnityEngine.InputSystem.Interactions.MultiTapInteraction")
             // {
             //     Debug.Log("Multitap");
@@ -45,6 +47,7 @@ namespace Game.Scripts.LiveObjects
             // {
             //     Debug.Log("Hold");
             // }
+            
             ZoneInteractionsOnonZoneInteractionComplete(_crateZoneInteraction);
         }
 

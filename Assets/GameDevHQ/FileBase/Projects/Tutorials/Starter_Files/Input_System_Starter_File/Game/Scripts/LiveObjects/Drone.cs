@@ -55,9 +55,8 @@ namespace Game.Scripts.LiveObjects
                 _inFlightMode = true;
                 OnEnterFlightMode?.Invoke();
                 UIManager.Instance.DroneView(true);
-                //_interactableZone.CompleteTask(4);
                 _droneZoneInteraction.CompleteTask(4);
-                // _inputActions.Character.Disable();
+                
                 _inputActions.Drone.Enable();
                 _inputActions.Drone.ExitFlightMode.performed += ExitFlightModeOnperformed;
             }
@@ -79,7 +78,6 @@ namespace Game.Scripts.LiveObjects
             _inFlightMode = false;
             UIManager.Instance.DroneView(false);
             _inputActions.Drone.Disable();
-            // _inputActions.Character.Enable();
         }
 
         private void Update()
@@ -94,6 +92,7 @@ namespace Game.Scripts.LiveObjects
         private void FixedUpdate()
         {
             _rigidbody.AddForce(transform.up * (9.81f), ForceMode.Acceleration);
+            
             if (_inFlightMode)
             {
                 CalculateMovementFixedUpdate(); 
