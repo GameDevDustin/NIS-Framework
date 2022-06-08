@@ -62,6 +62,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Punch"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7cafba3-74c3-4cb5-9566-118ab772d5c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1),MultiTap"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -205,6 +214,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd6ae6ff-1d7c-4499-b5dd-0bfaf36cebdb"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -529,6 +549,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Character_Interact = m_Character.FindAction("Interact", throwIfNotFound: true);
         m_Character_InteractHold = m_Character.FindAction("InteractHold", throwIfNotFound: true);
         m_Character_Escape = m_Character.FindAction("Escape", throwIfNotFound: true);
+        m_Character_Punch = m_Character.FindAction("Punch", throwIfNotFound: true);
         // Drone
         m_Drone = asset.FindActionMap("Drone", throwIfNotFound: true);
         m_Drone_Tilt = m_Drone.FindAction("Tilt", throwIfNotFound: true);
@@ -603,6 +624,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Interact;
     private readonly InputAction m_Character_InteractHold;
     private readonly InputAction m_Character_Escape;
+    private readonly InputAction m_Character_Punch;
     public struct CharacterActions
     {
         private @InputActions m_Wrapper;
@@ -611,6 +633,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Character_Interact;
         public InputAction @InteractHold => m_Wrapper.m_Character_InteractHold;
         public InputAction @Escape => m_Wrapper.m_Character_Escape;
+        public InputAction @Punch => m_Wrapper.m_Character_Punch;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -632,6 +655,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Escape.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnEscape;
+                @Punch.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPunch;
+                @Punch.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPunch;
+                @Punch.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnPunch;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -648,6 +674,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @Punch.started += instance.OnPunch;
+                @Punch.performed += instance.OnPunch;
+                @Punch.canceled += instance.OnPunch;
             }
         }
     }
@@ -764,6 +793,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnInteractHold(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnPunch(InputAction.CallbackContext context);
     }
     public interface IDroneActions
     {

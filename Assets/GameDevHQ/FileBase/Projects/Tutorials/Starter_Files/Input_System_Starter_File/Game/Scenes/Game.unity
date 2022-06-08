@@ -3081,7 +3081,7 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 482471388, guid: 1d553f90302742946bbf45996165949c, type: 3}
       propertyPath: _displayMessage
-      value: Break the Crate
+      value: punch the crate, hold for stronger punch.
       objectReference: {fileID: 0}
     - target: {fileID: 482471388, guid: 1d553f90302742946bbf45996165949c, type: 3}
       propertyPath: _zoneItems.Array.size
@@ -3197,7 +3197,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 4.266
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482471385, guid: 1d553f90302742946bbf45996165949c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d553f90302742946bbf45996165949c, type: 3}
 --- !u!4 &197238853 stripped
 Transform:
@@ -18188,7 +18189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972744894}
-  m_LocalRotation: {x: 0.22150683, y: 0.046706066, z: -0.0106220795, w: 0.97398174}
+  m_LocalRotation: {x: 0.22150683, y: 0.04670606, z: -0.010622081, w: 0.97398174}
   m_LocalPosition: {x: -0.48177326, y: 4.5286655, z: -4.833789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.Scripts.UI;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine.InputSystem;
 
@@ -22,6 +23,7 @@ namespace Game.Scripts.LiveObjects
         [SerializeField] [Tooltip("Hold the (---) Key to .....")]
         private string _displayMessage;
         private string _interactionKeyBinding;
+        private string _punchKeyBinding;
         [SerializeField] private GameObject[] _zoneItems;
         private bool _inZone = false;
         private bool _itemsCollected = false;
@@ -50,6 +52,7 @@ namespace Game.Scripts.LiveObjects
         {
             _inputActions = new InputActions();
             _interactionKeyBinding = _inputActions.Character.Interact.bindings[0].ToString().Substring(_inputActions.Character.Interact.bindings[0].ToString().Length - 1).ToUpper();
+            _punchKeyBinding = _inputActions.Character.Punch.bindings[0].ToString().Substring(_inputActions.Character.Punch.bindings[0].ToString().Length - 1).ToUpper();
             
             _inputActions.Character.Enable();
             _inputActions.Character.Interact.performed += InteractOnperformed;
@@ -57,8 +60,15 @@ namespace Game.Scripts.LiveObjects
             _inputActions.Character.InteractHold.started += InteractHoldOnstarted;
             _inputActions.Character.InteractHold.canceled += InteractHoldOncanceled;
             _inputActions.Character.Escape.performed += EscapeOnperformed;
+            //_inputActions.Character.Punch.performed += PunchOnperformed;
         }
-        
+
+        // private void PunchOnperformed(InputAction.CallbackContext context)
+        // {
+        //     Debug.Log("PunchOnPerformed context: " + context);
+        //     Debug.Log("Tap or Hold: " + context.interaction);
+        // }
+
         private void EscapeOnperformed(InputAction.CallbackContext context)
         {
             switch (_currentZoneID)
@@ -159,16 +169,26 @@ namespace Game.Scripts.LiveObjects
                         break;
 
                     case ZoneType.Action:
+                        string keyBinding;
+                        string pressType = "Press";
+
+                        if (_currentZoneID == 6) 
+                        { keyBinding = _punchKeyBinding;
+                            pressType = "Double tap";
+                        }
+                        else
+                        { keyBinding = _interactionKeyBinding; }
+                        
                         if (_actionPerformed == false)
                         {
                             _inZone = true;
                             if (_displayMessage != null)
                             {
-                                string message = $"Press the {_interactionKeyBinding} key to {_displayMessage}.";
+                                string message = pressType + $" the {keyBinding} key to {_displayMessage}.";
                                 UIManager.Instance.DisplayInteractableZoneMessage(true, message);
                             }
                             else
-                                UIManager.Instance.DisplayInteractableZoneMessage(true, $"Press the {_interactionKeyBinding} key to perform action");
+                                UIManager.Instance.DisplayInteractableZoneMessage(true, pressType + $" the {keyBinding} key to perform action");
                         }
                         break;
 
