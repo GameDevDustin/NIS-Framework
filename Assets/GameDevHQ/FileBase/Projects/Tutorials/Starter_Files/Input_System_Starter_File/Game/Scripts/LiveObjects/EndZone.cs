@@ -8,6 +8,8 @@ namespace Game.Scripts.LiveObjects
 {
     public class EndZone : MonoBehaviour
     {
+        [SerializeField] private ZoneInteractions _endZoneInteraction;
+        
         private void OnEnable()
         {
             //InteractableZone.onZoneInteractionComplete += InteractableZone_onZoneInteractionComplete;
@@ -18,7 +20,7 @@ namespace Game.Scripts.LiveObjects
         {
             if (zone.GetZoneID() == 7)
             {
-                InteractableZone.CurrentZoneID = 0;
+                ZoneInteractions.CurrentZoneID = 0;
                 SceneManager.LoadScene(0);
             }
         }

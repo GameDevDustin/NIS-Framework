@@ -24,7 +24,7 @@ namespace Game.Scripts.LiveObjects
 
         private void ZoneInteractionsOnonZoneInteractionComplete(ZoneInteractions zone)
         {
-            if (_isReadyToBreak == false && _brakeOff.Count >0)
+            if (_isReadyToBreak == false && _brakeOff.Count > 0)
             {
                 _wholeCrate.SetActive(false);
                 _brokenCrate.SetActive(true);
@@ -80,7 +80,6 @@ namespace Game.Scripts.LiveObjects
         private void Start()
         {
             _brakeOff.AddRange(_pieces);
-            
         }
         
         public void BreakPart()
