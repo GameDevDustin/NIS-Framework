@@ -144,28 +144,6 @@ MonoBehaviour:
   _inventoryIcon: {fileID: 21300000, guid: 8e46bcb2f14d4d144b9e4a395b47efa2, type: 3}
   _marker: {fileID: 516224712}
   _laptopScript: {fileID: 0}
---- !u!114 &14
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499452540572540283}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86c443bd499cba4195e4024731710ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _zoneType: 1
-  _zoneID: 1
-  _requiredID: 0
-  _displayMessage: Place C4
-  _zoneItems:
-  - {fileID: 758722189}
-  _inventoryIcon: {fileID: 21300000, guid: 8e46bcb2f14d4d144b9e4a395b47efa2, type: 3}
-  _zoneKeyInput: 101
-  _keyState: 0
-  _marker: {fileID: 0}
 --- !u!1 &1609523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100032, guid: dd2a94e6375f34604b717d100c70532d,
@@ -10501,7 +10479,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.97
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482471385, guid: 1d553f90302742946bbf45996165949c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d553f90302742946bbf45996165949c, type: 3}
 --- !u!4 &564970560 stripped
 Transform:
@@ -18164,7 +18143,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 972744894}
-  m_LocalRotation: {x: 0.22150683, y: 0.046706066, z: -0.0106220795, w: 0.97398174}
+  m_LocalRotation: {x: 0.22150683, y: 0.04670606, z: -0.010622081, w: 0.97398174}
   m_LocalPosition: {x: -0.48177326, y: 4.5286655, z: -4.833789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19970,7 +19949,7 @@ MonoBehaviour:
   _speed: 5
   _propAnim: {fileID: 181193216}
   _droneCam: {fileID: 106664337}
-  _interactableZone: {fileID: 0}
+  _droneZoneInteraction: {fileID: 1810029383}
 --- !u!65 &1073608671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23155,7 +23134,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -1.659
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482471385, guid: 1d553f90302742946bbf45996165949c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d553f90302742946bbf45996165949c, type: 3}
 --- !u!4 &1176696855 stripped
 Transform:
@@ -28163,7 +28143,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.17
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482471385, guid: 1d553f90302742946bbf45996165949c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d553f90302742946bbf45996165949c, type: 3}
 --- !u!1001 &1502343837
 PrefabInstance:
@@ -33655,6 +33636,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1501300053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1810029383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 482471388, guid: 1d553f90302742946bbf45996165949c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1501300053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015f0e43ff900c640998ceab0a0bfdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1810757429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37320,7 +37313,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.078
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 482471385, guid: 1d553f90302742946bbf45996165949c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1d553f90302742946bbf45996165949c, type: 3}
 --- !u!4 &2029547917 stripped
 Transform:
@@ -39255,7 +39249,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5779097135150792559}
   - component: {fileID: 5098578219200912083}
-  - component: {fileID: 14}
   - component: {fileID: 11}
   m_Layer: 0
   m_Name: Interactable_Place_C4_Zone
